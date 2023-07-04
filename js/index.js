@@ -30,6 +30,11 @@ registerBtn.onclick = function(e) {
     closeBtn.click();
 }
 
+// GET DATA AND STORE IN ARRAY
+if (localStorage.getItem("userData") != null) {
+    userData = JSON.parse(localStorage.getItem("userData"));
+}
+
 // REGISTRATION FUNCTION CODING
 function registrationData() {
     userData.push({
@@ -43,3 +48,5 @@ function registrationData() {
 
     localStorage.setItem("userData", JSON.stringify(userData));
 }
+
+// START RETURNING DATA ON PAGE FROM LOCAL STORAGE
