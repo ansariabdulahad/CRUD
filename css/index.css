@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* EMPLOYEE HEADER CODING */
+.header {
+    width: 100%;
+    padding: 10px 30px;
+    background-color: #EE534F;
+}
+
+.header h5 {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 28px;
+    color: #fff;
+}
+
+/* UPPER BTN CODING */
+.upper-btn-box {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    padding: 30px;
+}
+
+.upper-btn-box .left-box {
+    width: 50%;
+    height: 100%;
+}
+
+.upper-btn-box .left-box button,
+.upper-btn-box .right-box button {
+    border: none;
+    outline: none;
+    background-color: #4286F5;
+    padding: 13px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    cursor: pointer;
+}
+
+.upper-btn-box .right-box {
+    width: 50%;
+    height: 100%;
+}
+
+.upper-btn-box .right-box i {
+    font-size: 25px;
+    color: #4286F5;
+    padding: 10px;
+}
+
+.upper-btn-box .right-box input {
+    width: 70%;
+    padding: 13px;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid #4286F5;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+/* TABLE BOX CODING */
+.table-box {
+    width: 100%;
+    padding: 30px;
+}
+
+.table-box table {
+    width: 100%;
+}
+
+.table-box table tr th {
+    border-right: 1px solid #ccc;
+    padding: 30px 0 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.table-box table tr td {
+    border-right: 1px solid #ccc;
+    padding: 10px 0px 5px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom: 1px solid #ccc;
+}
+
+.table-box table tr td button {
+    width: 40%;
+    border: none;
+    outline: none;
+    background-color: #4286F5;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+}
+
+/* MODLE CODING */
+.modle {
+    width: 0%;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    border-top: 20px groove #4286F5;
+    background-color: #f2f2f2;
+    opacity: 0;
+    z-index: -1;
+    transition: .5s ease-in-out;
+}
+
+.modle.active {
+    opacity: 1;
+    z-index: 1;
+    width: 60%;
+}
+
+.modle .close-icon {
+    position: absolute;
+    right: -25px;
+    top: -45px;
+    font-size: 30px;
+    padding: 10px;
+    color: #EE534F;
+}
+
+.modle .left-modle {
+    width: 30%;
+    height: 100%;
+    background-color: #f2f2f2;
+}
+
+.modle .left-modle .img-box {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    padding: 30px;
+    position: relative;
+}
+
+.modle .left-modle .img-box input {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 40px;
+    top: 90px;
+    opacity: 0;
+}
+
+.modle .left-modle .img-box i {
+    font-size: 30px;
+    padding: 10px;
+    position: absolute;
+    right: 40px;
+    top: 90px;
+    color: #4286F5;
+    cursor: pointer;
+}
+
+.modle .left-modle .img-box img {
+    border-radius: 10px;
+}
+
+.modle .right-modle {
+    width: 70%;
+    height: 100%;
+    border-left: 5px groove #4286F5;
+    padding: 30px;
+}
+
+.modle .right-modle .input-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modle .right-modle .input-box label {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin: 20px 0px;
+}
+
+.modle .right-modle .input-box input {
+    width: 70%;
+    margin: 10px 0px;
+    border: none;
+    padding: 13px;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 3px solid #4286F5;
+}
+
+.modle .right-modle .input-box button {
+    border: none;
+    outline: none;
+    background-color: #4286F5;
+    padding: 13px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+    margin: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    width: 50%;
+    cursor: pointer;
+}
+
+button:disabled {
+    filter: grayscale(80%);
+}

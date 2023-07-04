@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS FILE LINK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/index.css">
+    <title>CRUD-APP</title>
+</head>
+<body>
+    <div class="header">
+        <h5>EMPLOYEE</h5>
+    </div>
+
+    <div class="upper-btn-box">
+        <div class="left-box">
+            <button id="add-btn"><i class="fas fa-plus"></i> Add Employee</button>
+            <button style="background-color: #33B5E6;"><i class="fas fas fa-eraser"></i> Clear Filtering</button>
+        </div>
+        <div class="right-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="empId" placeholder="Type Here ...">
+            <button style="background-color: #EE534F;">Search</button>
+        </div>
+    </div>
+
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>SR NO</th>
+                    <th>PROFILE</th>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>LAST NAME</th>
+                    <th>E-MAIL</th>
+                    <th>OFFICE CODE</th>
+                    <th>JOB TITLE</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>Hello world</td>
+                    <td>
+                        <button style="background-color: green;"><i class="fas fa-eye"></i></button>
+                        <button style="background-color: #EE534F;"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modle">
+        <i class="fas fa-times-circle close-icon" style="cursor: pointer;"></i>
+        <div class="left-modle">
+            <div class="img-box">
+                <img src="./images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg" height="150" width="150">
+                <i class="fas fa-plus"></i>
+                <input type="file">
+            </div>
+        </div>
+        <div class="right-modle">
+            <form id="register-form">
+                <div class="input-box">
+                    <label for="id">ID</label>
+                    <input type="text" id="id">
+                </div>
+                <div class="input-box">
+                    <label for="name">NAME</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="input-box">
+                    <label for="l-name">LAST NAME</label>
+                    <input type="text" id="l-name">
+                </div>
+                <div class="input-box">
+                    <label for="email">EMAIL</label>
+                    <input type="email" id="email">
+                </div>
+                <div class="input-box">
+                    <label for="office-code">OFFICE CODE</label>
+                    <input type="text" id="office-code">
+                </div>
+                <div class="input-box">
+                    <label for="job-title">JOB TITLE</label>
+                    <input type="text" id="job-title">
+                </div>
+                <div class="input-box">
+                    <button id="register-btn" style="background-color: green;">Register</button>
+                    <button style="background-color: #EE534F;" disabled>Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS FILE LINK -->
+    <script src="./js/index.js"></script>
+</body>
+</html>
