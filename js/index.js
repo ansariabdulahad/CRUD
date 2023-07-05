@@ -27,7 +27,7 @@ closeBtn.onclick = function() {
 }
 
 // REGISTER BTN CODING
-registerBtn.onsubmit = function(e) {
+registerForm.onsubmit = function(e) {
     e.preventDefault();
     registrationData(); // CALLING...
     registerForm.reset();
@@ -53,6 +53,12 @@ function registrationData() {
     });
 
     localStorage.setItem("userData", JSON.stringify(userData));
+
+    Swal.fire(
+        'Good job!',
+        'Registration Done !',
+        'success'
+    )
 }
 
 // START RETURNING DATA ON PAGE FROM LOCAL STORAGE
@@ -100,6 +106,10 @@ uploadPic.onchange = function() {
         fReader.readAsDataURL(uploadPic.files[0]);
     }
     else {
-        alert("Please upload below 1MB image");
+        Swal.fire(
+            'Warning !',
+            'Please upload below 1MB image!',
+            'warning'
+        )
     }
 }
