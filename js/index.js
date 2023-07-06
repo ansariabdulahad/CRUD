@@ -17,17 +17,17 @@ let tableData = document.querySelector("#table-data");
 let registerBtn = document.querySelector("#register-btn");
 
 // ADD BTN CODING
-addBtn.onclick = function() {
+addBtn.onclick = function () {
     modle.classList.add("active");
 }
 
 // CLOSE BTN CODING
-closeBtn.onclick = function() {
+closeBtn.onclick = function () {
     modle.classList.remove("active");
 }
 
 // REGISTER BTN CODING
-registerForm.onsubmit = function(e) {
+registerForm.onsubmit = function (e) {
     e.preventDefault();
     registrationData(); // CALLING...
     registerForm.reset();
@@ -43,13 +43,13 @@ if (localStorage.getItem("userData") != null) {
 // REGISTRATION FUNCTION CODING
 function registrationData() {
     userData.push({
-        id : idEl.value,
-        name : nameEl.value,
-        l_name : lNameEl.value,
-        email : emailEl.value,
-        officeCode : officeEl.value,
-        jobTitle : jobTitleEl.value,
-        profilePic : imgUrl != undefined ? imgUrl : "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg"
+        id: idEl.value,
+        name: nameEl.value,
+        l_name: lNameEl.value,
+        email: emailEl.value,
+        officeCode: officeEl.value,
+        jobTitle: jobTitleEl.value,
+        profilePic: imgUrl != undefined ? imgUrl : "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg"
     });
 
     localStorage.setItem("userData", JSON.stringify(userData));
@@ -73,7 +73,7 @@ const getDataFromLocal = () => {
             <tr index=${index}>
                 <td>${index + 1}</td>
                 <td>
-                    <img src="${data.profilePic}" width="40" height="40" style="border-radius: 10px;">
+                    <img src="${data.profilePic}" width="40" style="border-radius: 10px;">
                 </td>
                 <td>${data.id}</td>
                 <td>${data.name}</td>
@@ -83,23 +83,57 @@ const getDataFromLocal = () => {
                 <td>${data.jobTitle}</td>
                 <td>
                     <button style="background-color: green;"><i class="fas fa-eye"></i></button>
-                    <button style="background-color: #EE534F;"><i class="fas fa-trash"></i></button>
+                    <button class="del-btn" style="background-color: #EE534F;"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
         
         `;
-    })
+    });
+
+    // START DEL BTN CODING
+    let i;
+    let allDelBtn = document.querySelectorAll(".del-btn");
+
+    for (i = 0; i < allDelBtn.length; i++) {
+
+        allDelBtn[i].onclick = function () {
+            let tr = this.parentElement.parentElement;
+            let id = tr.getAttribute("index");
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    userData.splice(id, 1);
+                    localStorage.setItem("userData", JSON.stringify(userData));
+                    tr.remove();
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+    }
 }
 
 getDataFromLocal(); // CALLING...
 
 // IMAGE PROCESSING CODING
-uploadPic.onchange = function() {
+uploadPic.onchange = function () {
     // CHECK FILE SIZE 
-    if(uploadPic.files[0].size < 1000000) {
+    if (uploadPic.files[0].size < 1000000) {
         let fReader = new FileReader();
 
-        fReader.onload = function(e) {
+        fReader.onload = function (e) {
             imgUrl = e.target.result;
             profilePic.src = imgUrl;
         }
