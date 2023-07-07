@@ -3,6 +3,9 @@ let userData = [];
 let imgUrl;
 let i;
 let addBtn = document.querySelector("#add-btn");
+let delAllBtn = document.querySelector("#del-all-btn");
+let allDelBox = document.querySelector("#del-all-box");
+let searchEl = document.querySelector("#empId");
 let modle = document.querySelector(".modle");
 let closeBtn = document.querySelector(".close-icon");
 let registerForm = document.querySelector("#register-form");
@@ -25,6 +28,7 @@ addBtn.onclick = function () {
 
     updateBtn.disabled = true;
     registerBtn.disabled = false;
+    profilePic.src = "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg";      
 }
 
 // CLOSE BTN CODING
@@ -194,6 +198,9 @@ const getDataFromLocal = () => {
 
                 // UPDATE LOCAL STORAGE
                 localStorage.setItem("userData", JSON.stringify(userData));
+                for (i = 0; i < allInput.length; i++) {
+                    allInput[i].value = "";
+                }
                 modle.classList.remove("active");
                 getDataFromLocal(); // CALLING...
             }
@@ -223,3 +230,79 @@ uploadPic.onchange = function () {
         )
     }
 }
+
+// START SEARCH FUNCTIONALITY CODING
+searchEl.oninput = function () {
+    searchFunc(); // CALLING...
+}
+
+// SEARCH FUNC CODING
+function searchFunc() {
+    let filter = searchEl.value.toLowerCase();
+    let tr = tableData.querySelectorAll("TR");
+
+    for (i = 0; i < tr.length; i++) {
+        let id = tr[i].getElementsByTagName("TD")[2].innerHTML;
+        let name = tr[i].getElementsByTagName("TD")[3].innerHTML;
+        let l_name = tr[i].getElementsByTagName("TD")[4].innerHTML;
+        let email = tr[i].getElementsByTagName("TD")[5].innerHTML;
+        let officeCode = tr[i].getElementsByTagName("TD")[6].innerHTML;
+        let jobTitle = tr[i].getElementsByTagName("TD")[7].innerHTML;
+
+        if (id.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else if (name.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else if (l_name.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else if (email.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else if (officeCode.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else if (jobTitle.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        }
+        else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+
+// CLEAR ALL DATA CODING
+delAllBtn.addEventListener("click", function () {
+    if (allDelBox.checked == true) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                localStorage.removeItem("userData");
+                window.location = location.href;
+
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+    }
+    else {
+        Swal.fire(
+            'Warning!',
+            'Please check the box !',
+            'warning'
+        )
+    }
+})

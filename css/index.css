@@ -29,6 +29,14 @@
 .upper-btn-box .left-box {
     width: 50%;
     height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.upper-btn-box .left-box input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .upper-btn-box .left-box button,
