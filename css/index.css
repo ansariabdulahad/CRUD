@@ -204,6 +204,7 @@
     outline: none;
     background-color: transparent;
     border-bottom: 3px solid #4286F5;
+    font-size: 18px;
 }
 
 .modle .right-modle .input-box button {

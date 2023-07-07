@@ -1,10 +1,12 @@
 // GLOBAL VARIABLES
 let userData = [];
 let imgUrl;
+let i;
 let addBtn = document.querySelector("#add-btn");
 let modle = document.querySelector(".modle");
 let closeBtn = document.querySelector(".close-icon");
 let registerForm = document.querySelector("#register-form");
+let allInput = registerForm.querySelectorAll("INPUT");
 let profilePic = document.querySelector("#profile-pic");
 let uploadPic = document.querySelector("#upload-field");
 let idEl = document.querySelector("#id");
@@ -15,23 +17,33 @@ let officeEl = document.querySelector("#office-code");
 let jobTitleEl = document.querySelector("#job-title");
 let tableData = document.querySelector("#table-data");
 let registerBtn = document.querySelector("#register-btn");
+let updateBtn = document.querySelector("#update-btn");
 
 // ADD BTN CODING
 addBtn.onclick = function () {
     modle.classList.add("active");
+
+    updateBtn.disabled = true;
+    registerBtn.disabled = false;
 }
 
 // CLOSE BTN CODING
 closeBtn.onclick = function () {
     modle.classList.remove("active");
+
+    for (i = 0; i < allInput.length; i++) {
+        allInput[i].value = "";
+    }
+
+    profilePic.src = "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg";
 }
 
 // REGISTER BTN CODING
-registerForm.onsubmit = function (e) {
+registerBtn.onclick = function (e) {
     e.preventDefault();
     registrationData(); // CALLING...
     registerForm.reset();
-    closeBtn.click();
+    // closeBtn.click();
     getDataFromLocal(); // CALLING...
 }
 
@@ -42,23 +54,33 @@ if (localStorage.getItem("userData") != null) {
 
 // REGISTRATION FUNCTION CODING
 function registrationData() {
-    userData.push({
-        id: idEl.value,
-        name: nameEl.value,
-        l_name: lNameEl.value,
-        email: emailEl.value,
-        officeCode: officeEl.value,
-        jobTitle: jobTitleEl.value,
-        profilePic: imgUrl != undefined ? imgUrl : "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg"
-    });
+    if (idEl.value && nameEl.value && lNameEl.value && emailEl.value && officeEl.value && jobTitleEl.value != "") {
+        userData.push({
+            id: idEl.value,
+            name: nameEl.value,
+            l_name: lNameEl.value,
+            email: emailEl.value,
+            officeCode: officeEl.value,
+            jobTitle: jobTitleEl.value,
+            profilePic: imgUrl != undefined ? imgUrl : "images/marvel-cinematic-universe-marvel-comics-iron-man-spider-man-wallpaper-preview.jpg"
+        });
 
-    localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("userData", JSON.stringify(userData));
+        closeBtn.click();
 
-    Swal.fire(
-        'Good job!',
-        'Registration Done !',
-        'success'
-    )
+        Swal.fire(
+            'Good job!',
+            'Registration Done !',
+            'success'
+        )
+    }
+    else {
+        Swal.fire(
+            'Warning!',
+            'Please fill all the fields !',
+            'warning'
+        )
+    }
 }
 
 // START RETURNING DATA ON PAGE FROM LOCAL STORAGE
@@ -73,7 +95,7 @@ const getDataFromLocal = () => {
             <tr index=${index}>
                 <td>${index + 1}</td>
                 <td>
-                    <img src="${data.profilePic}" width="40" style="border-radius: 10px;">
+                    <img src="${data.profilePic}" width="40" height="40" style="border-radius: 10px;">
                 </td>
                 <td>${data.id}</td>
                 <td>${data.name}</td>
@@ -82,7 +104,7 @@ const getDataFromLocal = () => {
                 <td>${data.officeCode}</td>
                 <td>${data.jobTitle}</td>
                 <td>
-                    <button style="background-color: green;"><i class="fas fa-eye"></i></button>
+                    <button class="edit-btn" style="background-color: green;"><i class="fas fa-eye"></i></button>
                     <button class="del-btn" style="background-color: #EE534F;"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
@@ -91,7 +113,6 @@ const getDataFromLocal = () => {
     });
 
     // START DEL BTN CODING
-    let i;
     let allDelBtn = document.querySelectorAll(".del-btn");
 
     for (i = 0; i < allDelBtn.length; i++) {
@@ -121,6 +142,61 @@ const getDataFromLocal = () => {
                     )
                 }
             })
+        }
+    }
+
+    // START EDIT BTN CODING
+    let allEditBtn = document.querySelectorAll(".edit-btn");
+
+    for (i = 0; i < allEditBtn.length; i++) {
+        allEditBtn[i].onclick = function () {
+            let tr = this.parentElement.parentElement;
+            let td = tr.getElementsByTagName("TD");
+            let index = tr.getAttribute("index");
+            let imgTag = td[1].getElementsByTagName("IMG");
+
+            let profile_pic = imgTag[0].src;
+            let id = td[2].innerHTML;
+            let name = td[3].innerHTML;
+            let l_name = td[4].innerHTML;
+            let email = td[5].innerHTML;
+            let officeCode = td[6].innerHTML;
+            let jobTitle = td[7].innerHTML;
+
+            addBtn.click();
+            updateBtn.disabled = false;
+            registerBtn.disabled = true;
+
+            // ASSIGN DATA TO MODEL
+            idEl.value = id;
+            nameEl.value = name;
+            lNameEl.value = l_name;
+            emailEl.value = email;
+            officeEl.value = officeCode;
+            jobTitleEl.value = jobTitle;
+            profilePic.src = profile_pic;
+
+            // UPDATE BTN CODING
+            updateBtn.onclick = function (e) {
+                e.preventDefault();
+
+                // UPDATE USER DATA ARRAY
+                userData[index] = {
+                    id: idEl.value,
+                    name: nameEl.value,
+                    l_name: lNameEl.value,
+                    email: emailEl.value,
+                    officeCode: officeEl.value,
+                    jobTitle: jobTitleEl.value,
+                    profilePic: uploadPic.value == "" ? profilePic.src : imgUrl
+
+                }
+
+                // UPDATE LOCAL STORAGE
+                localStorage.setItem("userData", JSON.stringify(userData));
+                modle.classList.remove("active");
+                getDataFromLocal(); // CALLING...
+            }
         }
     }
 }
